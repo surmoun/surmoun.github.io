@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Hexo图片插入显示问题</title>
+    <link href="/2023/01/12/Hexo%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/"/>
+    <url>/2023/01/12/Hexo%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<p>使用Hexo进行博客的搭建 图片想存放在本地不借助于oos或者图床进行存储服务</p><h2 id="使用Markdown嵌入图片"><a href="#使用Markdown嵌入图片" class="headerlink" title="使用Markdown嵌入图片"></a>使用Markdown嵌入图片</h2><p>这是我第一个使用的插件（无果失败而告终）</p><p>可以只用<code>npm install hexo-renderer-marked</code>命令直接安装</p><p><a href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked</a> 3.1.0 引入了一个新的选项，其允许你无需使用 <code>asset_img</code> 标签插件就可以在 markdown 中嵌入图片</p><p>启用的方法 就是在根目录下的_config.yml</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">_config.yml</span><br><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><p><img src="image-20230112094743276.png" alt="image-20230112094743276"></p><p>唯一不足  就是你要改Typora中的图片路径  让你在本地无法显示</p><p><img src="image-20230112094920136.png" alt="image-20230112094920136"></p><p>你在网站上可以看到图片，但在本地Typora是看不到的。所以被我弃了</p><h2 id="使用hexo-asset-image"><a href="#使用hexo-asset-image" class="headerlink" title="使用hexo-asset-image"></a>使用hexo-asset-image</h2><p>赞赞赞  推荐这个</p><h3 id="下载插件"><a href="#下载插件" class="headerlink" title="下载插件"></a>下载插件</h3><p>进入根目录 打开git bash  输入  <code>npm install hexo-asset-image --save</code></p><h3 id="修改插件"><a href="#修改插件" class="headerlink" title="修改插件"></a>修改插件</h3><p>本来是无法完成该项操作的，通过修改可以了</p><p>不废话，下面是步骤：</p><ul><li>进入你博客的根目录，然后下面顺序找到<code>index.js</code>:<br><code>node_modules</code> –&gt; <code>hexo-asset-image</code> –&gt; <code>index.js</code></li><li>用VS Code 或者 记事本打开 <code>index.js</code></li><li>在第 58 行，可以找到这么一行代码：</li></ul><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">$(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&#x27;src&#x27;</span>, config.<span class="hljs-property">root</span> + link + src);<br></code></pre></td></tr></table></figure><ul><li>把这一行代码改成下面这样</li></ul><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">$(<span class="hljs-variable language_">this</span>).<span class="hljs-title function_">attr</span>(<span class="hljs-string">&#x27;src&#x27;</span>, src);<br></code></pre></td></tr></table></figure><ul><li>保存文件</li></ul><h3 id="typora设置"><a href="#typora设置" class="headerlink" title="typora设置"></a>typora设置</h3><p><strong>.&#x2F;${filename}</strong></p><p><img src="image-20230112095523146.png" alt="image-20230112095523146"></p><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ul><li>进入博客的根目录</li><li><code>node_modules</code> –&gt; <code>hexo-asset-image</code> –&gt; 打开 <code>README.md</code>, 里面写了用法。我截了个图：</li></ul><p><strong>注意</strong></p><ul><li>要先把 <code>_config.yml</code>中的 <code>post_asset_folder: false</code> 改成 <code>post_asset_folder: true</code> (默认是false，如果你没有修改过，那请去修改)</li><li>圆括号里面只要写 图片名.后缀 就可以了，不要多加任何的东西。</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Hexo建站</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
