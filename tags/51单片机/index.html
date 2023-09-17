@@ -5,7 +5,7 @@
   <meta name="generator" content="Hexo 6.3.0">
   <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
   <meta charset="utf-8">
-  
+  <meta name="robots" content="noindex,follow">
 
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
@@ -20,27 +20,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>picgo报错Error:connect ECONNREFUSED 127.0.0.1:443的解决方式 - 博客圈</title>
+  <title>标签：51单片机 - 博客圈</title>
 
   
-    <meta name="description" content="图床突然上传失败，debug一上午难受死了，存一下历程。 默认图床是github，考虑了几种情况：  代理的问题：搜索得到的方案，在浏览器设置搜索代理，打开系统代理设置，切换手动代理的状态，没用 图床的问题：检查了更新；在github仓库上传了图片，图床相册没有更新，直接在图床程序内上传图片也失败；考虑过监听端口占用的问题，似乎无关；检查了github图床的配置，路径没有问题 网络的问题：看了p">
-<meta property="og:type" content="article">
-<meta property="og:title" content="picgo报错Error:connect ECONNREFUSED 127.0.0.1:443的解决方式">
-<meta property="og:url" content="https://www.blogq.cn/2023/09/09/picgoerror/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="博客圈">
+<meta property="og:url" content="https://www.blogq.cn/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/index.html">
 <meta property="og:site_name" content="博客圈">
-<meta property="og:description" content="图床突然上传失败，debug一上午难受死了，存一下历程。 默认图床是github，考虑了几种情况：  代理的问题：搜索得到的方案，在浏览器设置搜索代理，打开系统代理设置，切换手动代理的状态，没用 图床的问题：检查了更新；在github仓库上传了图片，图床相册没有更新，直接在图床程序内上传图片也失败；考虑过监听端口占用的问题，似乎无关；检查了github图床的配置，路径没有问题 网络的问题：看了p">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic.blogq.cn/image-20230909211741836.png">
-<meta property="article:published_time" content="2023-09-09T13:15:18.433Z">
-<meta property="article:modified_time" content="2023-09-10T02:37:36.082Z">
 <meta property="article:author" content="云初">
-<meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic.blogq.cn/image-20230909211741836.png">
   
   
   
-  <meta name="keywords" content="hexo">
+  
 
   <!-- feed -->
   
@@ -65,10 +58,8 @@
   
 
 
-
-
   <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
+    <aside class='l_left' layout=''>
     
 
   
@@ -82,65 +73,37 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-
-
 <widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/09/15/51%E4%B8%B2%E5%8F%A3%E5%AE%9E%E9%AA%8C/"><span class="title">51单片机串口实验</span></a><a class="item title" href="/2023/09/13/esp8266/"><span class="title">ESP8266基本设置</span></a><a class="item title" href="/2023/09/09/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"><span class="title">测试文章</span></a><a class="item title" href="/2023/09/09/picgoerror/"><span class="title">picgo报错Error:connect ECONNREFUSED 127.0.0.1:443的解决方式</span></a><a class="item title" href="/2023/09/09/hello-world/"><span class="title">Hello World</span></a></div></widget>
-
-
-
 
 
 </div>
 
 
     </aside>
-    <div class='l_main'>
+    <div class='l_main list'>
+      
+  
+
+<header class="header mobile-only"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">博客圈</div><div class="sub cap">再次出发，使命必达</div></a></div></header>
+
+
+
       
 
-      
+  
+
+
+  
+
+<div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：51单片机</a><a href="/archives">归档</a></nav></div>
+  <div class="post-list post"><a class="post-card post " href="/2023/09/15/51%E4%B8%B2%E5%8F%A3%E5%AE%9E%E9%AA%8C/">
+<article class="md-text"><div class="post-cover"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://source.unsplash.com/1280x640/?51单片机"/></div><h2 class="post-title">51单片机串口实验</h2><div class="excerpt"><p>串口相关寄存器串口控制寄存器SCON
 
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-09-09T13:15:18.433Z">2023-09-09</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>picgo报错Error:connect ECONNREFUSED 127.0.0.1:443的解决方式</span></h1>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20230909211741836.png" alt="image-20230909211741836"></p>
-<p>图床突然上传失败，debug一上午难受死了，存一下历程。</p>
-<p>默认图床是github，考虑了几种情况：</p>
-<ol>
-<li>代理的问题：搜索得到的方案，在浏览器设置搜索代理，打开系统代理设置，切换手动代理的状态，没用</li>
-<li>图床的问题：检查了更新；在github仓库上传了图片，图床相册没有更新，直接在图床程序内上传图片也失败；考虑过监听端口占用的问题，似乎无关；检查了github图床的配置，路径没有问题</li>
-<li>网络的问题：看了<code>picgo.log</code>日志文件，报错为<code>RequestError: Error: connect ECONNREFUSED 127.0.0.1:443</code></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">2022-06-04 13:00:25 [PicGo ERROR] </span><br><span class="line">------Error Stack Begin------</span><br><span class="line">RequestError: Error: connect ECONNREFUSED 127.0.0.1:443</span><br><span class="line">    at new RequestError (C:\Program Files\PicGo\resources\app.asar\node_modules\request-promise-core\lib\errors.js:14:15)</span><br><span class="line">    at Request.plumbing.callback (C:\Program Files\PicGo\resources\app.asar\node_modules\request-promise-core\lib\plumbing.js:87:29)</span><br><span class="line">    at Request.RP$callback [as _callback] (C:\Program Files\PicGo\resources\app.asar\node_modules\request-promise-core\lib\plumbing.js:46:31)</span><br><span class="line">    at self.callback (C:\Program Files\PicGo\resources\app.asar\node_modules\request\request.js:185:22)</span><br><span class="line">    at Request.emit (events.js:200:13)</span><br><span class="line">    at Request.onRequestError (C:\Program Files\PicGo\resources\app.asar\node_modules\request\request.js:877:8)</span><br><span class="line">    at ClientRequest.emit (events.js:200:13)</span><br><span class="line">    at TLSSocket.socketErrorListener (_http_client.js:402:9)</span><br><span class="line">    at TLSSocket.emit (events.js:200:13)</span><br><span class="line">    at emitErrorNT (internal/streams/destroy.js:91:8)</span><br><span class="line">-------Error Stack End------- </span><br></pre></td></tr></table></figure>
-
-<p>在PicGo的github仓库issue搜索该报错，有一模一样的<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/issues/911">报错</a>，据开发者说是运营商DNS解析<a target="_blank" rel="noopener" href="https://api.github.com/">https://api.github.com</a> 域名有问题，picgo没法帮你解决网络问题。</p>
-<p>处理方式：换dns域名解析服务器、换host</p>
-<p>具体解决方式：</p>
-<ol>
-<li><p>查找 api.github.com 的正确域名（不要直接 ping，建议通过 DNS 查询工具进行查询）网址:yii666.com&lt;</p>
-</li>
-<li><p>将其添加到对应的 hosts 文件中</p>
-<p>在<code>C:\Windows\System32\drivers\etc</code>路径找到<code>hosts</code>文件，在末尾加入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">140.82.112.6 api.github.com</span><br><span class="line">140.82.114.5 api.github.com</span><br><span class="line">//github域名会定期更新，如果不行需要自行查询</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>刷新本地 dns 缓存：cmd执行命令行<code>ipconfig /flushdns</code></p>
-</li>
-</ol>
-<p>成功解决网址</p>
-
-
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/09/13/esp8266/">ESP8266基本设置</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/09/09/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/">测试文章</a></div></section></div>
-
-
-
+SM2：多机通信控制位，主要用于方式 2 和方式 3。当 SM2&#x3D;1 时可以利用收到的 RB8 来控制是否激活 RI（RB8＝0 时不激活 RI，收到的信息丢弃；RB8＝1 时收到的数据进入 SBUF，并激活 RI，进而在中断服务中将数据从 SBUF 读走）。当SM2&#x3D;0 时，不论收到的 RB8 为 0 和 1，均可以使收到的数...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-09-15T06:41:20.890Z">2023-09-15</time></span><span class="cap breadcrumb">物联网开发</span></div></article>
+</a></div>
+  
 
 
 
