@@ -23,22 +23,31 @@
   <title>51单片机开发模块化编程 - 博客圈</title>
 
   
-    <meta name="description" content="在使用keil5对单片机进行编程，我们会使用到各个传感器，也会引用很多自带库文件。也会涉及到一些自己编写的的头文件，我们需要对这些文件进行一些管理，例如：驱动文件，用户文件（延迟函数），主函数，公共文件的一些调用。 如果我们把所有文件都放在同一个文件夹下，不是很容易区分各个文件的功能，也不利于后期的调用和阅读，所以我们使用到keil C语言的模块化编程，可有很好地解决这一问题。">
+    <meta name="description" content="在使用keil5对单片机进行编程，我们会使用到各个传感器，也会引用很多自带库文件。也会涉及到一些自己编写的的头文件，我们需要对这些文件进行一些管理，例如：驱动文件，用户文件（延迟函数），主函数，公共文件的一些调用。 如果我们把所有文件都放在同一个文件夹下，不是很容易区分各个文件的功能，也不利于后期的调用和阅读，所以我们使用到keil C语言的模块化编程，可有很好地解决这一问题。 通过在本地新建文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="51单片机开发模块化编程">
 <meta property="og:url" content="https://www.blogq.cn/2023/10/14/51%E5%BC%80%E5%8F%91%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="博客圈">
-<meta property="og:description" content="在使用keil5对单片机进行编程，我们会使用到各个传感器，也会引用很多自带库文件。也会涉及到一些自己编写的的头文件，我们需要对这些文件进行一些管理，例如：驱动文件，用户文件（延迟函数），主函数，公共文件的一些调用。 如果我们把所有文件都放在同一个文件夹下，不是很容易区分各个文件的功能，也不利于后期的调用和阅读，所以我们使用到keil C语言的模块化编程，可有很好地解决这一问题。">
+<meta property="og:description" content="在使用keil5对单片机进行编程，我们会使用到各个传感器，也会引用很多自带库文件。也会涉及到一些自己编写的的头文件，我们需要对这些文件进行一些管理，例如：驱动文件，用户文件（延迟函数），主函数，公共文件的一些调用。 如果我们把所有文件都放在同一个文件夹下，不是很容易区分各个文件的功能，也不利于后期的调用和阅读，所以我们使用到keil C语言的模块化编程，可有很好地解决这一问题。 通过在本地新建文件">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.blogq.cn/image-20231014085040493.png">
+<meta property="og:image" content="https://pic.blogq.cn/image-20231014085444991.png">
+<meta property="og:image" content="https://pic.blogq.cn/image-20231014085738170.png">
+<meta property="og:image" content="https://pic.blogq.cn/image-20231014090219874.png">
+<meta property="og:image" content="https://pic.blogq.cn/image-20231014090420340.png">
+<meta property="og:image" content="https://pic.blogq.cn/image-20231014090652276.png">
+<meta property="og:image" content="https://pic.blogq.cn/image-20231014090757253.png">
 <meta property="article:published_time" content="2023-10-14T00:39:45.313Z">
-<meta property="article:modified_time" content="2023-10-14T00:44:10.586Z">
+<meta property="article:modified_time" content="2023-10-14T01:16:01.001Z">
 <meta property="article:author" content="云初">
-<meta property="article:tag" content="-51单片机 -模块化编程">
+<meta property="article:tag" content="51单片机">
+<meta property="article:tag" content="模块化编程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.blogq.cn/image-20231014085040493.png">
   
   
   
-  <meta name="keywords" content="-51单片机 -模块化编程">
+  <meta name="keywords" content="51单片机,模块化编程">
 
   <!-- feed -->
   
@@ -99,13 +108,41 @@
 
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91-%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B/">-物联网开发 -模块化编程</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-10-14T00:39:45.313Z">2023-10-14</time></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91/">物联网开发</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91%E5%BC%80%E5%8F%91/%E6%A8%A1%E5%9D%97%E5%8C%96%E7%BC%96%E7%A8%8B/">模块化编程</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-10-14T00:39:45.313Z">2023-10-14</time></div></div>
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>51单片机开发模块化编程</span></h1>
 <p>在使用keil5对单片机进行编程，我们会使用到各个传感器，也会引用很多自带库文件。也会涉及到一些自己编写的的头文件，我们需要对这些文件进行一些管理，例如：驱动文件，用户文件（延迟函数），主函数，公共文件的一些调用。</p>
 <p>如果我们把所有文件都放在同一个文件夹下，不是很容易区分各个文件的功能，也不利于后期的调用和阅读，所以我们使用到keil C语言的模块化编程，可有很好地解决这一问题。</p>
+<p>通过在本地新建文件夹I2C-EEPROM，内包含APP，User，Obj，Public文件夹 </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20231014085040493.png"></div></div>
 
+<p><strong>App 文件夹：</strong>用于存放外设驱动文件，如 LED、数码管、定时器等。</p>
+<p><strong>Obj 文件夹：</strong>用于存放编译产生的 c&#x2F;汇编&#x2F;链接的列表清单、调试信息、 hex文件、预览信息、封装库等文件。</p>
+<p><strong>Public 文件夹：</strong>用于存放 51 单片机公共的文件，如延时、51 头文件、变量类型重定义等。</p>
+<p><strong>User 文件夹：</strong>用于存放用户主函数文件，如 main.c。</p>
+<p>keil内的操作 ，新建工程更名为template 保存在I2C-EEPROM文件夹下</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20231014085444991.png"></div></div>
+
+<p>按照需要给工程分组并添加对应文件，这里我们在工程中分 3 组，User、App、Public，至于前面创建的 Obj 文件夹是在工程中无需体现，因为只是编译器生成的一些中间文件和.hex 执行文件。通常在工程组的命名与创建的文件夹名保持一致，方便查找到源文件位置。如下所示：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20231014085738170.png"></div></div>
+
+<p>通过新建文件夹，在keil里的文件结构下显示出我们刚才所创建的文件夹的目录，以便我们后续操作。</p>
+<p>在我们编程时，会涉及到很多的.c 和  .h的文件需要使用到 我们把应用到的文件通过Add Files添加到对应的文件目录下。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20231014090219874.png"></div></div>
+
+<p><strong>配置魔术棒选项卡</strong></p>
+<p>这一步的配置工作非常重要，很多人编写完程序编译后发现找不到 HEX 文件，还有的人直接编译前面添加好文件的工程出现报错，这些问题都是在这个地方没有配置好导致的。</p>
+<p>（1）Output 选项卡中把输出文件夹定位到我们实验目录下的 Obj 文件夹，如果想在编译的过程中生成 hex 文件，那么 Create HEX File 选项勾上。配置如下：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20231014090420340.png"></div></div>
+
+
+
+<p>（2）C51 选项卡配置，此处目的是将我们前面添加到工程组中的文件路径包括进来，否则程序中调用其他文件夹的头文件则会报错找不到头文件路径，具体步骤如下：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20231014090652276.png"></div></div>
+
+<p>添加的头文件路径是指，在 I2C-EEPROM 实验文件夹下里面，哪些文件夹内含有.h 头文件，并且需要被调用到的，通常我们会把只要含有头文件的文件夹都选择进去。比如本例程中 App 内含有很多子文件夹，它们里面都含有头文件，因此要分别添加，Public 也含有头文件，所以也要添加。添加完成后如下：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic.blogq.cn/image-20231014090757253.png"></div></div>
 
 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
