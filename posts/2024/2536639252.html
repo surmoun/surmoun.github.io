@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>【STM32】STM32的老人健康及跌倒检测系统 | 云初Coding</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.ico"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.13.3"><!-- inject head--><link rel="canonical" href="https://www.y1j.top/posts/2024/2536639252.html"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="系统功能1.能实时检测老人的心率血氧，血压，体温，身体姿态。2.能通过GPS定位实时定位获取老人所在的经纬度。3.数据实时上传阿里云通过云流转传输到android APP界面上。4.当老人心率血氧，血压，体温异常时设备会进行语音报警，并将异常数据传输到手机APP上，手机收到异常数据会发出震动以及铃响"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="云初Coding"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.ico"><link rel="apple-touch-icon" href="/img/pwa/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.13.3' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+    
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+    
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+    
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+    
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+        
+                if (name && keyObj[name]) return
+        
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+        }
+    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: {"preload":false,"path":"/search.xml"},
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: {"limit":50,"author":"作者: 云初","link":"链接: ","source":"来源: 云初Coding","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可","search":{"empty":"找不到你查询的内容：${query}","hit":"找到 ${hits} 条结果，用时 ${time} 毫秒","placeholder":"输入关键词快速查找","count":"共 <b>${count}</b> 条结果。"}},
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: [],
+        sayhello3: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    post_ai: false,
+    right_menu: false,
+    lure: false,
+    expire: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- background img--><!-- loading--><!-- console--><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  st-folder-fill"></i><span>文章列表</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  st-checkbox-multiple-blank-fill"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  st-price-tag-fill"></i><span>全部标签</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/SpringBoot/">SpringBoot<sup>3</sup></a><a href="/tags/Spring/">Spring<sup>1</sup></a><a href="/tags/STM32/">STM32<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">云初Coding</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">【STM32】STM32的老人健康及跌倒检测系统</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  st-folder-fill"></i><span>文章列表</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  st-checkbox-multiple-blank-fill"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  st-price-tag-fill"></i><span>全部标签</span></a></li></ul></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索"><i class="solitude st-search-line"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://s21.ax1x.com/2024/07/27/pkqEBVJ.png" alt="【STM32】STM32的老人健康及跌倒检测系统"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/STM32/">STM32</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32/"><span class="tags-name tags-punctuation">STM32</span></a></div></div></div></div><h1 class="post-title">【STM32】STM32的老人健康及跌倒检测系统</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2024-07-27 20:51:00"><i class="post-meta-icon solitude st-calendar-todo-fill"></i><time datetime="2024-07-27T12:51:00.000Z">2024-07-27T12:51:00.000Z</time></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="系统功能"><a href="#系统功能" class="headerlink" title="系统功能"></a>系统功能</h2><p>1.能实时检测老人的心率血氧，血压，体温，身体姿态。<br>2.能通过GPS定位实时定位获取老人所在的经纬度。<br>3.数据实时上传阿里云通过云流转传输到android APP界面上。<br>4.当老人心率血氧，血压，体温异常时设备会进行语音报警，并将异常数据传输到手机APP上，手机收到异常数据会发出震动以及铃响。<br>5.当老人发生摔倒时，设备会大约15秒的时间报警(蜂鸣器响和语音播报)，如老人身体无碍，则可以进行按键取消报警；同时老人在需要时可以通过手动报警按键进行报警求助，手机APP会收到老人摔倒以及求助的信息。<br>6.设备带OLED显示器可显示老人的身体情况信息；手机APP附带地图显示老人的实时位置<br>7.手机APP可设置老人身体数据异常的阈值。</p>
+<p><img src="https://s21.ax1x.com/2024/07/27/pkqEBVJ.png" alt="硬件图"></p>
+<h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><p>本系统以C语言为开发语言，基于STM32标准库设计与实现了一种老年人人身安全监护系统。本系统主要包含七个功能模块，分别是：心率血氧监测、跌倒监测、血压监测、红外体温监测、GPS定位、显示和数据传输。本系统首先使用传感器进行血压等数据的监测，GPS获取定位信息，屏幕显示老人的状态，然后系统通过WIFI连接，进行数据传输，通过手机APP查看状态。该系统的实现，不仅能够及时发现老年人身体状况异常，提高老年人的人身安全性，避免意外事件的发生，而且以物联网+健康为核心的智慧监测模式有望得到广泛推广和应用，为老年人带来更高质量更安全的晚年生活保障。</p>
+<h2 id="系统功能分析"><a href="#系统功能分析" class="headerlink" title="系统功能分析"></a>系统功能分析</h2><p><img src="https://s21.ax1x.com/2024/07/27/pkqE3Us.png" alt="系统架构图"></p>
+<p>本系统主要的功能包括以下7种功能模块。</p>
+<p>（1）心率血氧监测模块：以MAX30102为核心，用来监控老年人的心跳和脉搏。</p>
+<p>（2）跌倒监测模块：利用MPU6050的加速度及角度速率对摔倒进行判定。</p>
+<p>（3）血压监测模块：用MSP20进行血压的监测。</p>
+<p>（4）红外测温模块：主要通过GY-906-DAA进行测温。</p>
+<p>（5）GPS模块：通过串口接收到ATGM336H（GPS）的数据。</p>
+<p>（6）显示模块：直观显示老年人的身体状况，是否跌倒的状态。</p>
+<p>（7）数据传输模块：通过ESP8266模块实现网络的互联。</p>
+<h3 id="心率血氧功能分析"><a href="#心率血氧功能分析" class="headerlink" title="心率血氧功能分析"></a>心率血氧功能分析</h3><p>在本系统中通过MAX30102心率血氧传感器当手指放到芯片上，进行获取心率和血氧的数据，传送到STM32进行处理。</p>
+<h3 id="跌倒监测功能分析"><a href="#跌倒监测功能分析" class="headerlink" title="跌倒监测功能分析"></a>跌倒监测功能分析</h3><p>系统使用MPU-6050传感器判断老人是否发生跌倒。该传感器能够检测老人的身体姿势和运动状态，当检测到异常的加速度变化模式时，判定为可能发生跌倒，并触发相应的报警机制，以便及时提供援助。</p>
+<h3 id="血压传感器模块分析"><a href="#血压传感器模块分析" class="headerlink" title="血压传感器模块分析"></a>血压传感器模块分析</h3><p>系统采用了MSP20血压传感器，通过模数转换（ADC）技术来读取数据。然后将采集到的信息发送给STM32单片机，并对其进行平均处理。以获得更为准确的电压值。然后，将得到的平均电压值进行放大处理，再经过计算过程，最终得到精确的血压值。</p>
+<h3 id="红外测温模块功能分析"><a href="#红外测温模块功能分析" class="headerlink" title="红外测温模块功能分析"></a>红外测温模块功能分析</h3><p>该模块采用GY-906-DAA型红外线测温装置对使用者的身体温度进行监测，并将测量结果传送至STM32单片机进行分析。</p>
+<h3 id="GPS定位模块分析"><a href="#GPS定位模块分析" class="headerlink" title="GPS定位模块分析"></a>GPS定位模块分析</h3><p>系统通过ATGM336H传感器使用串口发送定位信息到STM32，将所获得的时间进行分析、分析，并将其转换为所需要的数据。传送给云平台进行地图显示。</p>
+<h3 id="显示模块功能分析"><a href="#显示模块功能分析" class="headerlink" title="显示模块功能分析"></a>显示模块功能分析</h3><p>显示模块需要对老年人当前的人身状态，健康情况的监测数据进行显示，系统通过IIC通信将数据显示到OLED屏幕，更直观看出各项数据以及状态。</p>
+<h3 id="数据传输功能分析"><a href="#数据传输功能分析" class="headerlink" title="数据传输功能分析"></a>数据传输功能分析</h3><p>系统使用ESP8266与阿里云平台进行数据传输，APP端进行上传的数据的显示，以及报警的通知显示。</p>
+<p><img src="https://s21.ax1x.com/2024/07/27/pkqEJCq.png" alt="手机APP"></p>
+<p><img src="https://s21.ax1x.com/2024/07/27/pkqEt2V.png" alt="阿里云平台"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在毕业设计的整个过程中，经过广泛阅读各种各样的文献资料，精心设计并成功实现出了老年人人身安全监护系统。通过此次毕业设计，学会了STM32单片机以及传感器的编程思路，极大地锻炼了自身的编程能力。从书本上看似清晰明了的知识过渡到实际操作实物时的茫然无措，然而通过持续不断地学习以及虚心请教他人，积极努力地去克服在编码过程中遇到的种种困难，这也为我将来的学习路线提供了更想要深入去了解和探索的浓厚兴趣。</p>
+<p>通过本次毕业设计的推进与完成，不但切实地将理论与实践紧密地进行了结合，而且还进一步拓展了自己的知识储备量。深入了解了一个系统从最初的设计需求确立，到功能逐步实现，再到功能测试的全部完整过程。这无疑为我未来的工作积累了极为难得的宝贵经验，让我能够以更加从容自信的姿态去面对未来职业生涯中的各种挑战和机遇。</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" src="/img/pwa/favicon.ico"></a><div class="post-copyright__author_name">云初Coding</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">云初Coding</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32/"><span class="tags-punctuation"></span>STM32<span class="tagsPageCount">1</span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/2024/3361359797.html"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【Spring篇】模拟网站登录获取Token</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" src="/img/avatar.avif"><div class="avatar-sticker"><img class="avatar-sticker-img" src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">云初</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude st-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD"><span class="toc-text">系统功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-text">系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">系统功能分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E7%8E%87%E8%A1%80%E6%B0%A7%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">心率血氧功能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%8C%E5%80%92%E7%9B%91%E6%B5%8B%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">跌倒监测功能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%80%E5%8E%8B%E4%BC%A0%E6%84%9F%E5%99%A8%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="toc-text">血压传感器模块分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E5%A4%96%E6%B5%8B%E6%B8%A9%E6%A8%A1%E5%9D%97%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">红外测温模块功能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GPS%E5%AE%9A%E4%BD%8D%E6%A8%A1%E5%9D%97%E5%88%86%E6%9E%90"><span class="toc-text">GPS定位模块分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%9D%97%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">显示模块功能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8A%9F%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">数据传输功能分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude st-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/2536639252.html" title="【STM32】STM32的老人健康及跌倒检测系统"><img alt="【STM32】STM32的老人健康及跌倒检测系统" src="https://s21.ax1x.com/2024/07/27/pkqEBVJ.png"></a><div class="content"><a class="title" href="/posts/2024/2536639252.html" title="【STM32】STM32的老人健康及跌倒检测系统">【STM32】STM32的老人健康及跌倒检测系统</a><a class="article-recent_post_categories" href="/posts/2024/2536639252.html">STM32</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/3361359797.html" title="【Spring篇】模拟网站登录获取Token"><img alt="【Spring篇】模拟网站登录获取Token" src="https://s21.ax1x.com/2024/07/18/pkowdV1.png"></a><div class="content"><a class="title" href="/posts/2024/3361359797.html" title="【Spring篇】模拟网站登录获取Token">【Spring篇】模拟网站登录获取Token</a><a class="article-recent_post_categories" href="/posts/2024/3361359797.html">Java</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/639972599.html" title="【SpringBoot篇】登录校验拦截器设置"><img alt="【SpringBoot篇】登录校验拦截器设置" src="https://s21.ax1x.com/2024/07/17/pkI5Cgs.png"></a><div class="content"><a class="title" href="/posts/2024/639972599.html" title="【SpringBoot篇】登录校验拦截器设置">【SpringBoot篇】登录校验拦截器设置</a><a class="article-recent_post_categories" href="/posts/2024/639972599.html">Java</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/2677420933.html" title="【SpringBoot篇】自定义异常处理"><img alt="【SpringBoot篇】自定义异常处理" src="https://s21.ax1x.com/2024/07/17/pkI5pCQ.png"></a><div class="content"><a class="title" href="/posts/2024/2677420933.html" title="【SpringBoot篇】自定义异常处理">【SpringBoot篇】自定义异常处理</a><a class="article-recent_post_categories" href="/posts/2024/2677420933.html">Java</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/2973527109.html" title="【SpringBoot篇】阿里云OSS--文件存储"><img alt="【SpringBoot篇】阿里云OSS--文件存储" src="/img/default.avif"></a><div class="content"><a class="title" href="/posts/2024/2973527109.html" title="【SpringBoot篇】阿里云OSS--文件存储">【SpringBoot篇】阿里云OSS--文件存储</a></div></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2024 By&nbsp;<a class="footer-bar-link" href="/">云初</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/js/utils.js?v=1.13.3"></script><script src="/js/main.js?v=1.13.3"></script><script src="/js/third_party/waterfall.min.js?v=1.13.3"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/third_party/universe.min.js?v=1.13.3"></script><script>dark()
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><!-- google adsense--><!-- search--><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="solitude st-close-fill"></i></button></nav><div class="search-wrap"><div class="search-box"><input class="search-box-input" id="search-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="输入关键词快速查找"></div><div id="search-results"><div id="search-hits"><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/tags/SpringBoot/')">SpringBoot</a><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/tags/Java/')">Java</a></div></div><div id="search-pagination"></div><div id="search-tips"></div></div></div><div id="search-mask"></div></div><script src="/js/search/local.js?v=1.13.3"></script><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["posts/2024/2536639252.html","posts/2024/3361359797.html","posts/2024/639972599.html","posts/2024/2677420933.html","posts/2024/2973527109.html","posts/2024/2973527110.html"];function toRandomPost(){ pjax.loadUrl(GLOBAL_CONFIG.root+posts[Math.floor(Math.random()*posts.length)]); }</script>
