@@ -4,6 +4,81 @@
   
     
     <entry>
+      <title>【STM32】MQTTFX连接ONENET物联网互联</title>
+      <link href="/posts/2025/3129673367.html"/>
+      <url>/posts/2025/3129673367.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="【STM32】MQTTFX连接ONENET物联网互联"><a href="#【STM32】MQTTFX连接ONENET物联网互联" class="headerlink" title="【STM32】MQTTFX连接ONENET物联网互联"></a>【STM32】MQTTFX连接ONENET物联网互联</h1><blockquote><p>MQTTFX连接测试OneNet物联网平台</p><p>适用于ALi云迁移到OneNet物联网平台</p></blockquote><h2 id="1-OneNet配置"><a href="#1-OneNet配置" class="headerlink" title="1.  OneNet配置"></a>1.  OneNet配置</h2><p>首先进行产品的创建，本测试使用的是智慧城市—公共服务—路灯作为demo进行运行。</p><p>设备节点选择直连设备，接入协议还是万能的MQTT  数据协议使用OneJson  联网方式选择Wifi</p><p><img src="https://s21.ax1x.com/2025/09/07/pV26iVK.png" alt="image-20250907140808524"></p><p>完成产品添加后进行添加设备</p><p><img src="https://s21.ax1x.com/2025/09/07/pV26Rqx.png" alt="image-20250907141127884"></p><p>接下来点击设备管理  点击详情 </p><p><img src="https://s21.ax1x.com/2025/09/07/pV26fZ6.png" alt="image-20250907141343210"></p><p>在详情里我们找到我们需要的信息 产品 名称  产品ID 和 设备秘钥   作为设备的三元要素 用于生成token密码</p><p><img src="https://s21.ax1x.com/2025/09/07/pV264IO.png" alt="image-20250907141520302"></p><h2 id="2-token生成密码"><a href="#2-token生成密码" class="headerlink" title="2.  token生成密码"></a>2.  token生成密码</h2><p><a href="https://open.iot.10086.cn/doc/mqtt/book/manual/auth/tool.html">https://open.iot.10086.cn/doc/mqtt/book/manual/auth/tool.html</a></p><p><a href="https://tool.lu/timestamp/">https://tool.lu/timestamp/</a>   时间戳生成地址</p><p>参数说明：</p><p>products&#x2F;D633KV55p5&#x2F;devices&#x2F;ludengDemo</p><blockquote><p>res：  products&#x2F;<strong>{pid}</strong>&#x2F;devices&#x2F;<em><em>{device_name}<strong>，其中{pid}替换为产品ID，</strong></em>{device_name}替换为设备名称ID</em>**</p><p>et：  时间戳  UNIX时间戳生成的未来一段时间的秒数，即password有效期</p><p>key： 点击上图的“详情”复制粘贴设备秘钥</p></blockquote><p><img src="https://s21.ax1x.com/2025/09/07/pV26vo8.png" alt="image-20250907142837858"></p><p>version&#x3D;2018-10-31&amp;res&#x3D;products%2FD6****V55p5%2Fdevices%2FludengDemo&amp;et&#x3D;1757230292&amp;method&#x3D;md5&amp;sign&#x3D;W2wqoGzSF8iteVOMo405jw%3D%3D</p><p><img src="https://s21.ax1x.com/2025/09/07/pV2cpWQ.png" alt="image-20250907143252444"></p><h2 id="3-MQTTFX环境配置"><a href="#3-MQTTFX环境配置" class="headerlink" title="3. MQTTFX环境配置"></a>3. MQTTFX环境配置</h2><p>设置Profile Name,设置接入地址与端口 （mqtt tls： 183.230.102.116:8883; mqtt-notls：218.201.45.7:1883），并设置Client ID、User Name与Password，其中参数设置方式如下： Client ID:设备名称 User Name：产品id Password：token 算法参见<a href="/book/device-connect&manager/device-auth.md">接入安全认证</a></p><p><img src="https://s21.ax1x.com/2025/09/07/pV26TRH.png" alt="image-20250907141808675"></p><p>token即password的 在上图2步骤即可得到</p><p><img src="https://s21.ax1x.com/2025/09/07/pV2cFLq.png" alt="image-20250907143637520"></p><p>成功连接完成  设备显示在线状态</p><p><img src="/%E3%80%90STM32%E3%80%91MQTTFX%E8%BF%9E%E6%8E%A5ONENET%E7%89%A9%E8%81%94%E7%BD%91%E4%BA%92%E8%81%94.assets/image-20250907144714178.png" alt="image-20250907144714178"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> STM32 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> STM32 - MQTT </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【SpringBoot篇】【SpringBoot】xxl-job调度和缓存技术</title>
+      <link href="/posts/2024/4239827742.html"/>
+      <url>/posts/2024/4239827742.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="缓存技术"><a href="#缓存技术" class="headerlink" title="缓存技术"></a>缓存技术</h2><p>在项目中对于常用的查询数据库业务，对于数据改动几乎很少改动的数据，若频繁调用数据库去请求获取该数据会比较浪费数据库的资源，所以该数据可以放在缓存里，方便读取，常用的缓存技术Spring Cache技术和Spring Redis Data</p><p>Spring Cache技术</p><p>采用了AOP的技术，利用代理的模式进行在方法执行前的自动数据处理缓存，对业务侵入性小</p><p>Spring Redis Data技术</p><p>实现是由RedisTemplate提供方法进行数据存储</p><p>两种方法第一种适合存储string单类型的数据，第二种存储类型更加全面</p><p>Spring Cache技术提供了以下注解 </p><blockquote><p>@Cacheable：在方法执行前查看是否有缓存对应的数据，如果有直接返回数据，如果没有调用方法获取数据返回，并缓存起来。</p><p>@CacheEvict：将一条或多条数据从缓存中删除。</p><p>@CachePut：将方法的返回值放到缓存中</p><p>@Caching：组合多个缓存注解；</p></blockquote><p><img src="https://s21.ax1x.com/2024/08/07/pkx6vQO.png" alt="缓存流程"></p><blockquote><p>用户通过请求数据首先查询缓存是否存在缓存，若存在即返回数据</p><p>不存在查询数据库，如数据查询到即存入缓存方便下次读取</p><p>如数据不存在即返回空数据</p></blockquote><h2 id="首页原型设计"><a href="#首页原型设计" class="headerlink" title="首页原型设计"></a>首页原型设计</h2><p><img src="https://s21.ax1x.com/2024/08/07/pkx6xyD.png" alt="首页服务原型"></p><p>业务分析：</p><p>首页服务列表：分为服务类别和服务项，显示两个服务类别即每个类别下显示四个服务项</p><p>要点避开：</p><p>因为涉及类的引用，尽可能避免查询数据库出现1+n现象</p><p>查询一级分类时，构建sql语句使用连表查询，也不可使用for-eache嵌套</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//截止下标</span></span><br><span class="line"><span class="type">int</span> <span class="variable">endindex</span> <span class="operator">=</span> list.size()&gt;<span class="number">2</span>? <span class="number">2</span>: list.size();</span><br><span class="line"> List&lt;ServeCategoryResDTO&gt; serveCategoryResDTOS = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(list.subList(<span class="number">0</span>,endindex));</span><br><span class="line">serveCategoryResDTOS.forEach(</span><br><span class="line">        item-&gt;&#123;</span><br><span class="line">            List&lt;ServeSimpleResDTO&gt; serveResDTOList = item.getServeResDTOList();</span><br><span class="line">            <span class="type">int</span> <span class="variable">endindex1</span> <span class="operator">=</span> serveResDTOList.size()&gt;<span class="number">4</span>?<span class="number">4</span>:serveResDTOList.size();</span><br><span class="line">            List&lt;ServeSimpleResDTO&gt; serveSimpleResDTOS = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(serveResDTOList.subList(<span class="number">0</span>,endindex1));</span><br><span class="line">            item.setServeResDTOList(serveSimpleResDTOS);</span><br><span class="line">        &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure><p>对于查询出的数据进行，下标截止以好应对小程序端的显示。</p><h2 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h2><p>使用Spring Cache注解形式</p><blockquote><p>unless属性的值是一个SpEL表达式，表示缓存不应该被执行的条件，若条件成立，则不会将执行结果放入缓存中。</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Caching(</span></span><br><span class="line"><span class="meta">       cacheable = &#123;</span></span><br><span class="line"><span class="meta">            @Cacheable(value = RedisConstants.CacheName.SERVE_ICON, key = &quot;#regionId&quot;, unless = &quot;#result.size() != 0&quot;, cacheManager = RedisConstants.CacheManager.THIRTY_MINUTES),</span></span><br><span class="line"><span class="meta">            @Cacheable(value = RedisConstants.CacheName.SERVE_ICON, key = &quot;#regionId&quot;, unless = &quot;#result.size() == 0&quot;, cacheManager = RedisConstants.CacheManager.FOREVER)</span></span><br><span class="line"><span class="meta">           &#125;</span></span><br><span class="line"><span class="meta">    )</span></span><br></pre></td></tr></table></figure><h2 id="xxl-job定时任务"><a href="#xxl-job定时任务" class="headerlink" title="xxl-job定时任务"></a>xxl-job定时任务</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@XxlJob(value = &quot;activeRegionCacheSync&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">activeRegionCacheSync</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">       log.info(<span class="string">&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始缓存&quot;</span>);</span><br><span class="line">       <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> RedisConstants.CacheName.JZ_CACHE+<span class="string">&quot;::ACTIVE_REGIONS&quot;</span>;</span><br><span class="line">       redisTemplate.delete(key);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       List&lt;RegionSimpleResDTO&gt; regionSimpleResDTOS = regionService.queryActiveRegionList();</span><br><span class="line">       regionSimpleResDTOS.forEach(item-&gt;&#123;</span><br><span class="line">            <span class="type">Long</span> <span class="variable">id</span> <span class="operator">=</span> item.getId();</span><br><span class="line">            <span class="type">String</span> <span class="variable">hotkey</span> <span class="operator">=</span> RedisConstants.CacheName.HOT_SERVE+<span class="string">&quot;::&quot;</span>+id;</span><br><span class="line">            redisTemplate.delete(hotkey);</span><br><span class="line">            homeService.queryServeAggregationSimpleResDTOByRegionIdCache(id);</span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">       log.info(<span class="string">&quot;结束缓存&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【云岗到家】需求文档分析 day01</title>
+      <link href="/posts/2024/3019059261.html"/>
+      <url>/posts/2024/3019059261.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>首先该项目是互联网+传统行业家政的业务，分为四个端（客户端，机构端，运营端，服务端）。</p><img src="https://s21.ax1x.com/2024/08/05/pkvtX9A.png" alt="image-20240805110230874" style="zoom:50%;" /><p>核心业务：</p><p>运营端在服务管理进行区域服务管理</p><p>用户端在登录对应区域选择服务项目</p><p>家政服务和机构端通过平台进行抢单</p><h2 id="需求文档分析"><a href="#需求文档分析" class="headerlink" title="需求文档分析"></a>需求文档分析</h2><p>运营基础模块提供基本数据功能：</p><p><img src="https://s21.ax1x.com/2025/09/06/pV2JuzF.png" alt="image-20250906192406271"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SpringCloud </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【STM32】STM32的老人健康及跌倒检测系统</title>
       <link href="/posts/2024/2536639252.html"/>
       <url>/posts/2024/2536639252.html</url>
@@ -161,6 +236,19 @@
             <tag> SpringBoot </tag>
             
         </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【SpringBoot篇】Mysql高级配置</title>
+      <link href="/posts/2024/1.html"/>
+      <url>/posts/2024/1.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Mysql配置"><a href="#Mysql配置" class="headerlink" title="Mysql配置"></a>Mysql配置</h2><p>查看mysql使用的字符集</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%char%&#x27;</span>;</span><br></pre></td></tr></table></figure><h2 id="SQL-MODE"><a href="#SQL-MODE" class="headerlink" title="SQL_MODE"></a>SQL_MODE</h2><blockquote><p>是mysql的系统变量，定义了对于sql语句的语法、数据校验和处理方式的严格程度。</p></blockquote><p>查看默认设置的sql mode值</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables  <span class="keyword">like</span> <span class="string">&#x27;sql_mode&#x27;</span>；</span><br></pre></td></tr></table></figure><p><strong>ONLY_FULL_GROUP _BY :</strong> </p><p>更改sql_mode</p><p>临时设置</p><p>永久设置</p><p>找到my.cn配置文件</p><p>设置ONLY_FULL_GROUP _BY </p><p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240813164355795.png" alt="image-20240813164355795"></p><blockquote><p>分组时 select后必须跟 聚合函数（max，min，avg），分组字段  name不能出现在select后边 因为sql_mode 设置ONLY_FULL_GROUP _BY </p></blockquote><p>去掉only_full_group_by 错误显示，name值不对</p><h2 id="MYSQL逻辑架构"><a href="#MYSQL逻辑架构" class="headerlink" title="MYSQL逻辑架构"></a>MYSQL逻辑架构</h2><p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240813171118832.png" alt="image-20240813171118832"></p><p>jdbc六个步骤</p><p>注册驱动 </p><p>获取连接</p><p>创建语句</p><p>执行语句</p><p>获取数据结果集处理</p><p>关闭驱动</p><h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="InnoDB-mysql默认存储引擎"><a href="#InnoDB-mysql默认存储引擎" class="headerlink" title="InnoDB   mysql默认存储引擎"></a>InnoDB   mysql默认存储引擎</h3><p>支持事务，行级锁定，外键约束，支持崩溃恢复</p><p>开启事务在commit提交后数据才保存</p><p>start transaction； 开启事务</p><p>查看表结构</p><p>show create table <code>表名</code></p><p>外键约束</p><p>ON DELETE RESTRICT 主表有数据不让更新</p><p>ON UPDATE CASCAADE 主表改了子表也更改 在子表中设置外键</p><h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>不支持事务</p><p>表级锁定，更安全效率太低</p><p>较低的存储空间，比较适合存储大量非事务数据</p><h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>数据存储在内存里</p><p>不支持持久化</p><p>表级锁定</p><h2 id="Mysql索引"><a href="#Mysql索引" class="headerlink" title="Mysql索引"></a>Mysql索引</h2><p>常见索引结构  进行高效的数据查询   树的结构 </p><p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240815090839166.png" alt="image-20240815090839166"></p><p>索引在更新数据表时也需要变动，降低表的更新速度</p><p>在大量数据的检索，进行数据的索引</p><p>常见的索引结构：</p><p>B树  多路搜索树 索引有序 </p><p>Hash索引 映射hash码  不支持范围查询和排序</p><p>R树  多维数据的索引结构   地理位置信息学习通GIS</p><p>B+树 聚合索引 复合索引 唯一索引</p><p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240815092402274.png" alt="image-20240815092402274"></p><p>BST树 二叉搜索树  问题瘸腿问题</p><p>AVL树 平衡二叉搜索树    多叉树提高效率</p><p>层级关系不能超过1 </p><p>B-tree  多路平衡搜索树</p><p>B+tree   查找效率更稳定</p><h2 id="Mysql索引类型"><a href="#Mysql索引类型" class="headerlink" title="Mysql索引类型"></a>Mysql索引类型</h2><p>聚簇索引    侄搜索条件 主键值   只能用于InnoDB  B+tree</p><p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240815153140574.png" alt="image-20240815153140574"></p><p>非聚簇索引： 二级索引，辅助索引   回表查询</p><blockquote><p>叶子节点：主键和索引列</p></blockquote><p>聚簇索引   </p><blockquote><p>叶子节点：整条数据</p></blockquote><p>以时间换空间，以空间换时间</p><blockquote><p>为什么非聚簇需要回表查询，不回表行不行？</p></blockquote><p>如果存在多个二级索引，每个二级索引树的叶子节点都存储完整数据，占用太多存储空间</p><p>虽然回表二次查询，利用B+tree进行查找，速度并没有慢太多</p><p>联合索引  同时多个列建立索引   c2索引相同，进行c3索引</p><p>覆盖索引 </p><h2 id="MyISAM-索引结构（了解）"><a href="#MyISAM-索引结构（了解）" class="headerlink" title="MyISAM 索引结构（了解）"></a>MyISAM 索引结构（了解）</h2><p>非聚簇索引</p><h2 id="MyIsam和InnoDB对比"><a href="#MyIsam和InnoDB对比" class="headerlink" title="MyIsam和InnoDB对比"></a>MyIsam和InnoDB对比</h2><p>CREATE INDEX  索引名  on  表（字段）</p><h2 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h2><ol><li><p>计算函数导致失效</p><p>函数和%or_号 模糊匹配开头导致失效</p></li><li><p>不等于&lt;&gt;  !&#x3D; 导致索引失效</p></li><li><p>IS NOT NULL 导致索引失效</p></li><li><p>类型转换导致索引失效</p></li><li><p>全索引匹配效率最高</p></li><li><p>违反最佳左前缀法则</p></li><li><p>范围查询导致失效</p></li></ol><h2 id="Mysql关联查询优化"><a href="#Mysql关联查询优化" class="headerlink" title="Mysql关联查询优化"></a>Mysql关联查询优化</h2><p>自动选择驱动表的原则，往表大的上建立索引</p>]]></content>
+      
+      
       
     </entry>
     

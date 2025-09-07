@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>【SpringBoot篇】Mysql高级配置 | 云初Coding</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.ico"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.13.3"><!-- inject head--><link rel="canonical" href="https://www.y1j.top/posts/2024/1.html"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="Mysql配置查看mysql使用的字符集 1show variables like &amp;#x27;%char%&amp;#x27;; SQL_MODE 是mysql的系统变量，定义了对于sql语句的语法、数据校验和处理方式的严格程度。 查看默认设置的sql mode值 1show variables"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="云初Coding"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.ico"><link rel="apple-touch-icon" href="/img/pwa/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.13.3' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+    
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+    
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+    
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+    
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+        
+                if (name && keyObj[name]) return
+        
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+        }
+    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: {"preload":false,"path":"/search.xml"},
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: {"limit":50,"author":"作者: 云初","link":"链接: ","source":"来源: 云初Coding","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可","search":{"empty":"找不到你查询的内容：${query}","hit":"找到 ${hits} 条结果，用时 ${time} 毫秒","placeholder":"输入关键词快速查找","count":"共 <b>${count}</b> 条结果。"}},
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: [],
+        sayhello3: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    post_ai: false,
+    right_menu: false,
+    lure: false,
+    expire: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- background img--><!-- loading--><!-- console--><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  st-folder-fill"></i><span>文章列表</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  st-checkbox-multiple-blank-fill"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  st-price-tag-fill"></i><span>全部标签</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/SpringBoot/">SpringBoot<sup>3</sup></a><a href="/tags/Spring/">Spring<sup>2</sup></a><a href="/tags/STM32/">STM32<sup>2</sup></a><a href="/tags/SpringCloud/">SpringCloud<sup>1</sup></a><a href="/tags/STM32-MQTT/">STM32 - MQTT<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">云初Coding</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">【SpringBoot篇】Mysql高级配置</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  st-folder-fill"></i><span>文章列表</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  st-checkbox-multiple-blank-fill"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  st-price-tag-fill"></i><span>全部标签</span></a></li></ul></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索"><i class="solitude st-search-line"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="/img/default.avif" alt="【SpringBoot篇】Mysql高级配置"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">【SpringBoot篇】Mysql高级配置</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2024-06-04 08:05:00"><i class="post-meta-icon solitude st-calendar-todo-fill"></i><time datetime="2024-06-04T00:05:00.000Z">2024-06-04T00:05:00.000Z</time></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Mysql配置"><a href="#Mysql配置" class="headerlink" title="Mysql配置"></a>Mysql配置</h2><p>查看mysql使用的字符集</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%char%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SQL-MODE"><a href="#SQL-MODE" class="headerlink" title="SQL_MODE"></a>SQL_MODE</h2><blockquote>
+<p>是mysql的系统变量，定义了对于sql语句的语法、数据校验和处理方式的严格程度。</p>
+</blockquote>
+<p>查看默认设置的sql mode值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables  <span class="keyword">like</span> <span class="string">&#x27;sql_mode&#x27;</span>；</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>ONLY_FULL_GROUP _BY :</strong> </p>
+<p>更改sql_mode</p>
+<p>临时设置</p>
+<p>永久设置</p>
+<p>找到my.cn配置文件</p>
+<p>设置ONLY_FULL_GROUP _BY </p>
+<p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240813164355795.png" alt="image-20240813164355795"></p>
+<blockquote>
+<p>分组时 select后必须跟 聚合函数（max，min，avg），分组字段  name不能出现在select后边 因为sql_mode 设置ONLY_FULL_GROUP _BY </p>
+</blockquote>
+<p>去掉only_full_group_by 错误显示，name值不对</p>
+<h2 id="MYSQL逻辑架构"><a href="#MYSQL逻辑架构" class="headerlink" title="MYSQL逻辑架构"></a>MYSQL逻辑架构</h2><p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240813171118832.png" alt="image-20240813171118832"></p>
+<p>jdbc六个步骤</p>
+<p>注册驱动 </p>
+<p>获取连接</p>
+<p>创建语句</p>
+<p>执行语句</p>
+<p>获取数据结果集处理</p>
+<p>关闭驱动</p>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="InnoDB-mysql默认存储引擎"><a href="#InnoDB-mysql默认存储引擎" class="headerlink" title="InnoDB   mysql默认存储引擎"></a>InnoDB   mysql默认存储引擎</h3><p>支持事务，行级锁定，外键约束，支持崩溃恢复</p>
+<p>开启事务在commit提交后数据才保存</p>
+<p>start transaction； 开启事务</p>
+<p>查看表结构</p>
+<p>show create table <code>表名</code></p>
+<p>外键约束</p>
+<p>ON DELETE RESTRICT 主表有数据不让更新</p>
+<p>ON UPDATE CASCAADE 主表改了子表也更改 在子表中设置外键</p>
+<h3 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h3><p>不支持事务</p>
+<p>表级锁定，更安全效率太低</p>
+<p>较低的存储空间，比较适合存储大量非事务数据</p>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>数据存储在内存里</p>
+<p>不支持持久化</p>
+<p>表级锁定</p>
+<h2 id="Mysql索引"><a href="#Mysql索引" class="headerlink" title="Mysql索引"></a>Mysql索引</h2><p>常见索引结构  进行高效的数据查询   树的结构 </p>
+<p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240815090839166.png" alt="image-20240815090839166"></p>
+<p>索引在更新数据表时也需要变动，降低表的更新速度</p>
+<p>在大量数据的检索，进行数据的索引</p>
+<p>常见的索引结构：</p>
+<p>B树  多路搜索树 索引有序 </p>
+<p>Hash索引 映射hash码  不支持范围查询和排序</p>
+<p>R树  多维数据的索引结构   地理位置信息学习通GIS</p>
+<p>B+树 聚合索引 复合索引 唯一索引</p>
+<p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240815092402274.png" alt="image-20240815092402274"></p>
+<p>BST树 二叉搜索树  问题瘸腿问题</p>
+<p>AVL树 平衡二叉搜索树    多叉树提高效率</p>
+<p>层级关系不能超过1 </p>
+<p>B-tree  多路平衡搜索树</p>
+<p>B+tree   查找效率更稳定</p>
+<h2 id="Mysql索引类型"><a href="#Mysql索引类型" class="headerlink" title="Mysql索引类型"></a>Mysql索引类型</h2><p>聚簇索引    侄搜索条件 主键值   只能用于InnoDB  B+tree</p>
+<p><img src="/%E3%80%90Mysql%E3%80%91mysql%E9%AB%98%E7%BA%A7%E7%AF%87.assets/image-20240815153140574.png" alt="image-20240815153140574"></p>
+<p>非聚簇索引： 二级索引，辅助索引   回表查询</p>
+<blockquote>
+<p>叶子节点：主键和索引列</p>
+</blockquote>
+<p>聚簇索引   </p>
+<blockquote>
+<p>叶子节点：整条数据</p>
+</blockquote>
+<p>以时间换空间，以空间换时间</p>
+<blockquote>
+<p>为什么非聚簇需要回表查询，不回表行不行？</p>
+</blockquote>
+<p>如果存在多个二级索引，每个二级索引树的叶子节点都存储完整数据，占用太多存储空间</p>
+<p>虽然回表二次查询，利用B+tree进行查找，速度并没有慢太多</p>
+<p>联合索引  同时多个列建立索引   c2索引相同，进行c3索引</p>
+<p>覆盖索引 </p>
+<h2 id="MyISAM-索引结构（了解）"><a href="#MyISAM-索引结构（了解）" class="headerlink" title="MyISAM 索引结构（了解）"></a>MyISAM 索引结构（了解）</h2><p>非聚簇索引</p>
+<h2 id="MyIsam和InnoDB对比"><a href="#MyIsam和InnoDB对比" class="headerlink" title="MyIsam和InnoDB对比"></a>MyIsam和InnoDB对比</h2><p>CREATE INDEX  索引名  on  表（字段）</p>
+<h2 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h2><ol>
+<li><p>计算函数导致失效</p>
+<p>函数和%or_号 模糊匹配开头导致失效</p>
+</li>
+<li><p>不等于&lt;&gt;  !&#x3D; 导致索引失效</p>
+</li>
+<li><p>IS NOT NULL 导致索引失效</p>
+</li>
+<li><p>类型转换导致索引失效</p>
+</li>
+<li><p>全索引匹配效率最高</p>
+</li>
+<li><p>违反最佳左前缀法则</p>
+</li>
+<li><p>范围查询导致失效</p>
+</li>
+</ol>
+<h2 id="Mysql关联查询优化"><a href="#Mysql关联查询优化" class="headerlink" title="Mysql关联查询优化"></a>Mysql关联查询优化</h2><p>自动选择驱动表的原则，往表大的上建立索引</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" src="/img/pwa/favicon.ico"></a><div class="post-copyright__author_name">云初Coding</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">云初Coding</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/2024/2973527110.html"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【SpringBoot篇】阿里云OSS--文件存储</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" src="/img/avatar.avif"><div class="avatar-sticker"><img class="avatar-sticker-img" src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">云初</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude st-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql%E9%85%8D%E7%BD%AE"><span class="toc-text">Mysql配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-MODE"><span class="toc-text">SQL_MODE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MYSQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84"><span class="toc-text">MYSQL逻辑架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InnoDB-mysql%E9%BB%98%E8%AE%A4%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">InnoDB   mysql默认存储引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MyISAM"><span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memory"><span class="toc-text">Memory</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql%E7%B4%A2%E5%BC%95"><span class="toc-text">Mysql索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql%E7%B4%A2%E5%BC%95%E7%B1%BB%E5%9E%8B"><span class="toc-text">Mysql索引类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyISAM-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-text">MyISAM 索引结构（了解）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyIsam%E5%92%8CInnoDB%E5%AF%B9%E6%AF%94"><span class="toc-text">MyIsam和InnoDB对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88"><span class="toc-text">索引失效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96"><span class="toc-text">Mysql关联查询优化</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude st-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/3129673367.html" title="【STM32】MQTTFX连接ONENET物联网互联"><img alt="【STM32】MQTTFX连接ONENET物联网互联" src="https://s21.ax1x.com/2024/07/27/pkqEHRP.png"></a><div class="content"><a class="title" href="/posts/2025/3129673367.html" title="【STM32】MQTTFX连接ONENET物联网互联">【STM32】MQTTFX连接ONENET物联网互联</a><a class="article-recent_post_categories" href="/posts/2025/3129673367.html">STM32</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/4239827742.html" title="【SpringBoot篇】【SpringBoot】xxl-job调度和缓存技术"><img alt="【SpringBoot篇】【SpringBoot】xxl-job调度和缓存技术" src="https://s21.ax1x.com/2024/08/06/pkxlbcT.png"></a><div class="content"><a class="title" href="/posts/2024/4239827742.html" title="【SpringBoot篇】【SpringBoot】xxl-job调度和缓存技术">【SpringBoot篇】【SpringBoot】xxl-job调度和缓存技术</a><a class="article-recent_post_categories" href="/posts/2024/4239827742.html">Java</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/3019059261.html" title="【云岗到家】需求文档分析 day01"><img alt="【云岗到家】需求文档分析 day01" src="https://s21.ax1x.com/2024/07/27/pkqmfSI.png"></a><div class="content"><a class="title" href="/posts/2024/3019059261.html" title="【云岗到家】需求文档分析 day01">【云岗到家】需求文档分析 day01</a><a class="article-recent_post_categories" href="/posts/2024/3019059261.html">Java</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/2536639252.html" title="【STM32】STM32的老人健康及跌倒检测系统"><img alt="【STM32】STM32的老人健康及跌倒检测系统" src="https://s21.ax1x.com/2024/07/27/pkqEBVJ.png"></a><div class="content"><a class="title" href="/posts/2024/2536639252.html" title="【STM32】STM32的老人健康及跌倒检测系统">【STM32】STM32的老人健康及跌倒检测系统</a><a class="article-recent_post_categories" href="/posts/2024/2536639252.html">STM32</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2024/869620054.html" title="【STM32】STM32的智能家庭安防系统"><img alt="【STM32】STM32的智能家庭安防系统" src="https://s21.ax1x.com/2024/07/27/pkqEHRP.png"></a><div class="content"><a class="title" href="/posts/2024/869620054.html" title="【STM32】STM32的智能家庭安防系统">【STM32】STM32的智能家庭安防系统</a><a class="article-recent_post_categories" href="/posts/2024/869620054.html">STM32</a></div></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By&nbsp;<a class="footer-bar-link" href="/">云初</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/js/utils.js?v=1.13.3"></script><script src="/js/main.js?v=1.13.3"></script><script src="/js/third_party/waterfall.min.js?v=1.13.3"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/third_party/universe.min.js?v=1.13.3"></script><script>dark()
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><!-- google adsense--><!-- search--><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="solitude st-close-fill"></i></button></nav><div class="search-wrap"><div class="search-box"><input class="search-box-input" id="search-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="输入关键词快速查找"></div><div id="search-results"><div id="search-hits"><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/tags/SpringBoot/')">SpringBoot</a><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/tags/Java/')">Java</a></div></div><div id="search-pagination"></div><div id="search-tips"></div></div></div><div id="search-mask"></div></div><script src="/js/search/local.js?v=1.13.3"></script><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["posts/2025/3129673367.html","posts/2024/4239827742.html","posts/2024/3019059261.html","posts/2024/2536639252.html","posts/2024/869620054.html","posts/2024/3361359797.html","posts/2024/639972599.html","posts/2024/2677420933.html","posts/2024/2973527109.html","posts/2024/2973527110.html","posts/2024/1.html"];function toRandomPost(){ pjax.loadUrl(GLOBAL_CONFIG.root+posts[Math.floor(Math.random()*posts.length)]); }</script>
