@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /archives/
+Disallow: /page/
+Disallow: /js/
+Disallow: /css/
+Disallow: /img/
+
+# 百度爬虫
+User-agent: Baiduspider
+Allow: /
+
+Sitemap: https://www.codeaix.cn/sitemap.xml
+Sitemap: https://www.codeaix.cn/baidusitemap.xml

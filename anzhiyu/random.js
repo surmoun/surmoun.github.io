@@ -1,3 +1,3 @@
-var posts=["blog/2024/2973527109.html","blog/2024/1.html","blog/2025/3129673367.html","blog/2024/2536639252.html","blog/2024/2677420933.html","blog/2024/3019059261.html","blog/2024/4239827742.html","blog/2024/869620054.html","blog/2024/3361359797.html","blog/2026/323469779.html","blog/2025/172447394.html","blog/2024/639972599.html","blog/2024/2973527110.html"];function toRandomPost(){
+var posts=["blog/jetbrains-activate-2099.html","blog/aliyun-oss-file-storage.html","blog/mysql-advanced.html","blog/springboot-custom-exception.html","blog/springboot-login-interceptor.html","blog/spring-mock-login-token.html","blog/springboot-xxl-job-cache.html","blog/stm32-elderly-health-fall-detection.html","blog/stm32-mqttfx-onenet.html","blog/stm32-smart-home-security.html","blog/typora-image-hosting.html","blog/what-is-aliyun-oss.html","blog/yungang-day01-requirements.html"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };
