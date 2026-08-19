@@ -1,0 +1,3 @@
+var posts=["blog/2024/2973527109.html","blog/2024/1.html","blog/2025/3129673367.html","blog/2024/2536639252.html","blog/2024/2677420933.html","blog/2024/3019059261.html","blog/2024/4239827742.html","blog/2024/869620054.html","blog/2024/3361359797.html","blog/2026/323469779.html","blog/2025/172447394.html","blog/2024/639972599.html","blog/2024/2973527110.html"];function toRandomPost(){
+    pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
+  };
