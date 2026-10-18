@@ -1,55 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.codeaix.cn/blog/what-is-aliyun-oss.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/springboot-login-interceptor.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/jetbrains-activate-2099.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/typora-image-hosting.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/yungang-day01-requirements.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
     <loc>https://www.codeaix.cn/blog/spring-mock-login-token.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/springboot-custom-exception.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/springboot-xxl-job-cache.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/stm32-smart-home-security.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/stm32-elderly-health-fall-detection.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/stm32-mqttfx-onenet.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/mysql-advanced.html</loc>
-    <lastmod>2026-08-19</lastmod>
-  </url>
-  <url>
-    <loc>https://www.codeaix.cn/blog/aliyun-oss-file-storage.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-18</lastmod>
   </url>
 </urlset> 
