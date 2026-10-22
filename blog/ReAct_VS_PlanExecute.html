@@ -1,0 +1,462 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【AiCoding】ReAct VS Plan—Execute | Codeaix 实验室</title><meta name="keywords" content="AiCoding"><meta name="author" content="云初"><meta name="copyright" content="云初"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【AiCoding】ReAct VS Plan—Execute"><meta name="application-name" content="【AiCoding】ReAct VS Plan—Execute"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【AiCoding】ReAct VS Plan—Execute"><meta property="og:url" content="https://www.codeaix.cn/blog/ReAct_VS_PlanExecute.html"><meta property="og:site_name" content="Codeaix 实验室"><meta property="og:description" content="ReAct+Tool callReasoning+Acting 推理和行动交替进行  （Reasoning + Acting）执行流程     深入ReAct模式基础ReActLLM每一步都输出Thought+Action，然后执行Action，观察结果继续循环 整体流程 输入用户问题 + 工具列"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.codeaix.top/piclist/202610221508591792652939896.png"><meta property="article:author" content="云初"><meta property="article:tag" content="[&quot;Codeaix&quot;,&quot;云初&quot;,&quot;全栈开发&quot;,&quot;AI Coding&quot;,&quot;编程教程&quot;,&quot;Codex&quot;,&quot;前端&quot;,&quot;后端&quot;]"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.codeaix.top/piclist/202610221508591792652939896.png"><meta name="description" content="ReAct+Tool callReasoning+Acting 推理和行动交替进行  （Reasoning + Acting）执行流程     深入ReAct模式基础ReActLLM每一步都输出Thought+Action，然后执行Action，观察结果继续循环 整体流程 输入用户问题 + 工具列"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://www.codeaix.cn/blog/ReAct_VS_PlanExecute.html"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="baidu-site-verification" content="codeva-4Faugr5fv0"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 云初","link":"链接: ","source":"来源: Codeaix 实验室","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Codeaix 实验室',
+  title: '【AiCoding】ReAct VS Plan—Execute',
+  postAI: '',
+  pageFillDescription: 'ReAct+Tool call, 深入ReAct模式, 基础ReAct, 整体流程, Reflexion, 模型工具（Functionx2FTool）, 示例, Plan和DAG, DFS 深度优先搜索 Depth-First Search, 核心流程推理和行动交替进行执行流程深入模式基础每一步都输出然后执行观察结果继续循环整体流程输入用户问题工具列表历史轨迹送入思考模型输出模型基于已有信息分析现在知道什么缺什么下一步该做什么判断是否还需要调用工具还是直接出答案示例用户想知道今天石家庄气温我缺少实时数据需要调用天气查询工具行动模型输出结构化指令输出工具名称参数交给框架调度器执行不是模型自己调用是外层系统执行工具调用示例石家庄观察系统回填不是模型生成工具执行返回结果搜索内容计算结果接口返回报错信息追加到上下文历史里示例石家庄今日晴循环判断把并入对话历史回到第步再次交给思考当模型判断信息足够输出终止循环一般会加最大步数上限防止死循环用户要我创建一个项目我需要用工具项目已创建执行循环评估器反思记忆库不微调模型权重用自然语言复盘沉淀教训跨轮次复用经验在的基础上添加了反思的功能例如我本次需要让去创建的工程在文件夹下当我没有去创建文件夹他就会回顾自己的行动总结成功教训保存到记忆中下次遇到就会首先检查文件夹是否创建与是否存在导致可能覆盖的状况刚才创建项目时我没有检查目录是否存在导致可能覆盖已有文件下次应该先检查模型工具工具名称唯一标识模型用来指定调用哪个工具比如工具描述告诉模型这个工具能干什么什么时候该调用参数入参定义参数名类型是否必填说明示例查询指定城市的实时天气城市名一句话分工找谁什么时候用带什么参数和把一次任务交给两个角色规划器负责出计划它调用模型时不给任何工具只要求模型输出一份格式的计划执行器拿着这份计划按依赖关系一批一批地跑任务正常情况下规划器只调用一次模型用户审阅时补充要求或者任务失败后需要重新规划规划器会再调用模型深度优先搜索核心思想一路往深处走走不通再回溯优先深度后广度像走迷宫一条路走到头碰壁再退回来试别的分支核心流程访问当前节点标记已访问防止环路重复走依次遍历当前节点的相邻子节点如果子节点没访问过递归进入这个子节点继续往下深挖所有子节点遍历完回溯回到上一层尝试其他分支口诀先深挖走到底无路回退再探旁支特性调用次数多每步都调少初始规划一次执行阶段调用轻量异常才重规划执行速度慢每步都有网络往返快规划一次后续步骤本地轻量执行消耗高低灵活性高边执行边调整遇到意外随时换路线低优先按照预先制定的计划执行可预测性低路径不可控容易跑偏绕路高计划可见步骤可审计可人工预审错误恢复容易单步失败后下一轮即时调整策略一般单步出错需要触发重规划流程成本更高适用场景探索类不确定环境调试代码信息检索未知路径任务流程固定长步骤流水线批量任务需要事前审核方案的任务边走边想循环先全局规划再按计划执行失败才重规划什么时候用任务简单步就能完成需要探索性操作不确定具体步骤用户想看到思考过程需要频繁的人机交互比如查看当前目录有什么文件直接一步完成什么时候用任务复杂需要多步操作步骤之间有明确依赖关系追求执行效率需要可预比如搭建一个完整的项目包括前后端数据库部署用更合适',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-10-22 15:31:07',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Codeaix 实验室</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><span> 归档</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/tags/"><span> 标签</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> 关于</span></a></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AiCoding/" style="font-size: 1.05rem;">AiCoding<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/10/"><span class="card-archive-list-date">十月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/" itemprop="url">Java</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AiCoding/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AiCoding</span></a></span></div></div><h1 class="post-title" itemprop="name headline">【AiCoding】ReAct VS Plan—Execute</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-10-22T10:27:00.000Z" title="发表于 2026-10-22 18:27:00">2026-10-22</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-10-22T07:31:07.324Z" title="更新于 2026-10-22 15:31:07">2026-10-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为长沙"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>长沙</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://img.codeaix.top/piclist/202610221508591792652939896.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://www.codeaix.cn/blog/ReAct_VS_PlanExecute.html"><header><a class="post-meta-categories" href="/categories/Java/" itemprop="url">Java</a><a href="/tags/AiCoding/" tabindex="-1" itemprop="url">AiCoding</a><h1 id="CrawlerTitle" itemprop="name headline">【AiCoding】ReAct VS Plan—Execute</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">云初</span><time itemprop="dateCreated datePublished" datetime="2026-10-22T10:27:00.000Z" title="发表于 2026-10-22 18:27:00">2026-10-22</time><time itemprop="dateCreated datePublished" datetime="2026-10-22T07:31:07.324Z" title="更新于 2026-10-22 15:31:07">2026-10-22</time></header><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/piclist/202610221508591792652939896.png"></p>
+<h2 id="ReAct-Tool-call"><a href="#ReAct-Tool-call" class="headerlink" title="ReAct+Tool call"></a>ReAct+Tool call</h2><p>Reasoning+Acting 推理和行动交替进行 </p>
+<p>（Reasoning + Acting）执行流程</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/piclist/202610220955411792634141643.png" alt="image-20261022091558628" style="zoom:50%;" />
+
+
+
+<h3 id="深入ReAct模式"><a href="#深入ReAct模式" class="headerlink" title="深入ReAct模式"></a>深入ReAct模式</h3><h4 id="基础ReAct"><a href="#基础ReAct" class="headerlink" title="基础ReAct"></a>基础ReAct</h4><p>LLM每一步都输出Thought+Action，然后执行Action，观察结果继续循环</p>
+<h5 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h5><ol>
+<li><p><strong>输入用户问题 + 工具列表 + 历史轨迹</strong> 送入 LLM</p>
+</li>
+<li><p>Thought（思考，模型输出）</p>
+<p>： 模型基于已有信息分析：现在知道什么、缺什么、下一步该做什么；判断是否还需要调用工具，还是直接出答案</p>
+<blockquote>
+<p>示例：Thought: 用户想知道今天石家庄气温，我缺少实时数据，需要调用天气查询工具</p>
+</blockquote>
+</li>
+<li><p>Action（行动，模型输出结构化指令）</p>
+<p>： 输出工具名称 + 参数，交给框架 &#x2F; 调度器执行；不是模型自己调用，是外层系统执行工具调用</p>
+<blockquote>
+<p>示例：Action: SearchWeather (city&#x3D;”石家庄”)</p>
+</blockquote>
+</li>
+<li><p>Observation（观察，系统回填，不是模型生成）</p>
+<p>： 工具执行返回结果（搜索内容、计算结果、接口返回、报错信息），追加到上下文历史里</p>
+<blockquote>
+<p>示例：Observation: 石家庄今日 22℃，晴</p>
+</blockquote>
+</li>
+<li><p><strong>循环判断</strong>（ReAct Loop）： 把 <code>Observation</code> 并入对话历史，回到第 2 步，再次交给 LLM 思考； 当模型判断信息足够，输出 <strong>Final Answer</strong>，终止循环； 一般会加<strong>最大步数上限</strong>，防止死循环。</p>
+</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/piclist/202610220955501792634150816.png" alt="未命名绘图.drawio"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Thought: 用户要我创建一个 Java 项目，我需要用 create_project 工具</span><br><span class="line">Action: create_project(&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;demo&quot;</span>, <span class="string">&quot;type&quot;</span>: <span class="string">&quot;java&quot;</span>&#125;)</span><br><span class="line">Observation: 项目已创建</span><br></pre></td></tr></table></figure>
+
+<h4 id="Reflexion"><a href="#Reflexion" class="headerlink" title="Reflexion"></a>Reflexion</h4><p>ReAct 执行循环 + 评估器 Evaluator + 反思 Reflector +  episodic 记忆库<strong>；</strong>不微调模型权重，用自然语言复盘、沉淀教训，跨轮次复用经验</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/piclist/202610221109141792638554515.png" alt="image-20261022110911725"></p>
+<p>在ReAct的基础上添加了反思的功能，例如我本次需要让Agent去创建HelloCli的工程在code_agent文件夹下，当我没有去创建文件夹code_agent他就会回顾自己的行动，总结成功教训，保存到记忆中，下次遇到就会首先检查文件夹是否创建与是否存在，导致可能覆盖的状况。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">Thought: 刚才创建项目时我没有检查目录是否存在，导致可能覆盖已有文件。下次应该先 list_dir 检查。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="模型工具（Function-Tool）"><a href="#模型工具（Function-Tool）" class="headerlink" title="模型工具（Function&#x2F;Tool）"></a>模型工具（Function&#x2F;Tool）</h2><ol>
+<li><strong>name（工具名称）</strong>：唯一标识，模型用来指定调用哪个工具，比如 <code>get_weather</code></li>
+<li><strong>description（工具描述）</strong>：告诉模型这个工具能干什么、什么时候该调用</li>
+<li><strong>parameters（参数 schema）</strong>：入参定义，参数名、类型、是否必填、说明</li>
+</ol>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;get_weather&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;查询指定城市的实时天气&quot;,</span><br><span class="line">  &quot;parameters&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;object&quot;,</span><br><span class="line">    &quot;properties&quot;: &#123;</span><br><span class="line">      &quot;city&quot;: &#123;&quot;type&quot;:&quot;string&quot;,&quot;description&quot;:&quot;城市名&quot;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;required&quot;: [&quot;city&quot;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一句话分工： name：找谁；description：什么时候用；parameters：带什么参数</p>
+</blockquote>
+<h2 id="Plan和DAG"><a href="#Plan和DAG" class="headerlink" title="Plan和DAG"></a>Plan和DAG</h2><p>Plan-and-Execute 把一次任务交给两个角色。规划器（<code>Planner</code>）负责出计划，它调用模型时不给任何工具，只要求模型输出一份 JSON 格式的计划。执行器（<code>PlanExecuteAgent</code>）拿着这份计划，按依赖关系一批一批地跑任务。正常情况下规划器只调用一次模型；用户审阅时补充要求，或者任务失败后需要重新规划，规划器会再调用模型。</p>
+<h4 id="DFS-深度优先搜索-Depth-First-Search"><a href="#DFS-深度优先搜索-Depth-First-Search" class="headerlink" title="DFS 深度优先搜索 Depth-First Search"></a>DFS 深度优先搜索 Depth-First Search</h4><p>核心思想：<strong>一路往深处走，走不通再回溯，优先深度、后广度</strong>，像走迷宫，一条路走到头，碰壁再退回来试别的分支。</p>
+<h5 id="核心流程"><a href="#核心流程" class="headerlink" title="核心流程"></a>核心流程</h5><ol>
+<li>访问当前节点，标记已访问（防止环路重复走）</li>
+<li>依次遍历当前节点的相邻子节点</li>
+<li>如果子节点<strong>没访问过</strong>，递归进入这个子节点（继续往下深挖）</li>
+<li>所有子节点遍历完 → 回溯，回到上一层，尝试其他分支</li>
+</ol>
+<blockquote>
+<p>口诀：<strong>先深挖，走到底，无路回退，再探旁支</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>ReAct</th>
+<th>Plan-and-Execute</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LLM 调用次数</td>
+<td>多（每步都调）</td>
+<td>少（初始规划一次，执行阶段调用轻量，异常才重规划）</td>
+</tr>
+<tr>
+<td>执行速度</td>
+<td>慢（每步都有 LLM 网络往返）</td>
+<td>快（规划一次，后续步骤本地 &#x2F; 轻量执行）</td>
+</tr>
+<tr>
+<td>Token 消耗</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>灵活性</td>
+<td>高，边执行边调整，遇到意外随时换路线</td>
+<td>低，优先按照预先制定的计划执行</td>
+</tr>
+<tr>
+<td>可预测性</td>
+<td>低，路径不可控，容易跑偏绕路</td>
+<td>高，计划可见，步骤可审计、可人工预审</td>
+</tr>
+<tr>
+<td>错误恢复</td>
+<td>容易，单步失败后下一轮 Thought 即时调整策略</td>
+<td>一般，单步出错需要触发重规划流程，成本更高</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>探索类、不确定环境、调试代码、信息检索、未知路径任务</td>
+<td>流程固定、长步骤流水线、批量任务、需要事前审核方案的任务</td>
+</tr>
+</tbody></table>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/piclist/202610221503431792652623479.png" alt="image-20261022150339878"></li>
+<li><strong>ReAct：边走边想（Thought-Action-Observation 循环）</strong></li>
+<li><strong>Plan-and-Execute：先全局规划，再按计划执行，失败才重规划</strong></li>
+</ul>
+<p>什么时候用 ReAct</p>
+<ul>
+<li>任务简单，1-3 步就能完成</li>
+<li>需要探索性操作，不确定具体步骤</li>
+<li>用户想看到思考过程</li>
+<li>需要频繁的人机交互</li>
+</ul>
+<p>比如“查看当前目录有什么文件”，直接 ReAct 一步完成。</p>
+<p>什么时候用 Plan-and-Execute</p>
+<ul>
+<li>任务复杂，需要多步操作</li>
+<li>步骤之间有明确依赖关系</li>
+<li>追求执行效率</li>
+<li>需要可预</li>
+</ul>
+<p>比如“搭建一个完整的 Web 项目，包括前后端、数据库、部署”，用 Plan-and-Execute 更合适。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/logo.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/logo.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">云初</div><div class="post-copyright__author_desc">全栈开发 · AI Coding · 编程教程</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.codeaix.cn/blog/ReAct_VS_PlanExecute.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.codeaix.cn/blog/ReAct_VS_PlanExecute.html')">【AiCoding】ReAct VS Plan—Execute</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.codeaix.cn/blog/ReAct_VS_PlanExecute.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=【AiCoding】ReAct VS Plan—Execute&amp;url=https://www.codeaix.cn/blog/ReAct_VS_PlanExecute.html&amp;pic=https://img.codeaix.top/piclist/202610221508591792652939896.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.codeaix.cn" target="_blank">Codeaix 实验室</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/AiCoding/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AiCoding<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://img.codeaix.top/piclist/202610221508591792652939896.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/blog/spring-mock-login-token.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/2026/10/f287987575ff734d9555dc4d50ebdaef.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【Spring篇】模拟网站登录获取Token</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div></div><div class="comment-wrap"></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description">全栈开发 / AI Coding / 工程化实践</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">云初</h1><div class="author-info__desc">全栈开发 · AI Coding · 编程教程</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/surmoun" target="_blank" title="GitHub"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="mailto:haojindot@qq.com" target="_blank" title="邮箱"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ReAct-Tool-call"><span class="toc-number">1.</span> <span class="toc-text">ReAct+Tool call</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%85%A5ReAct%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">深入ReAct模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80ReAct"><span class="toc-number">1.1.1.</span> <span class="toc-text">基础ReAct</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">整体流程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reflexion"><span class="toc-number">1.1.2.</span> <span class="toc-text">Reflexion</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%B7%A5%E5%85%B7%EF%BC%88Function-Tool%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">模型工具（Function&#x2F;Tool）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.1.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plan%E5%92%8CDAG"><span class="toc-number">3.</span> <span class="toc-text">Plan和DAG</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DFS-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2-Depth-First-Search"><span class="toc-number">3.0.1.</span> <span class="toc-text">DFS 深度优先搜索 Depth-First Search</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B"><span class="toc-number">3.0.1.1.</span> <span class="toc-text">核心流程</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/ReAct_VS_PlanExecute.html" title="【AiCoding】ReAct VS Plan—Execute"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/piclist/202610221508591792652939896.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【AiCoding】ReAct VS Plan—Execute"/></a><div class="content"><a class="title" href="/blog/ReAct_VS_PlanExecute.html" title="【AiCoding】ReAct VS Plan—Execute">【AiCoding】ReAct VS Plan—Execute</a><time datetime="2026-10-22T10:27:00.000Z" title="发表于 2026-10-22 18:27:00">2026-10-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/spring-mock-login-token.html" title="【Spring篇】模拟网站登录获取Token"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.codeaix.top/2026/10/f287987575ff734d9555dc4d50ebdaef.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Spring篇】模拟网站登录获取Token"/></a><div class="content"><a class="title" href="/blog/spring-mock-login-token.html" title="【Spring篇】模拟网站登录获取Token">【Spring篇】模拟网站登录获取Token</a><time datetime="2024-07-16T10:27:00.000Z" title="发表于 2024-07-16 18:27:00">2024-07-16</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2025 - 2026 By <a class="footer-bar-link" href="/" title="云初" target="_blank">云初</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">1</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://hexo.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/archives/"><span> 归档</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/tags/"><span> 标签</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> 关于</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AiCoding/" style="font-size: 0.88rem;">AiCoding<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2025 By 安知鱼 V1.7.1",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 云初 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
